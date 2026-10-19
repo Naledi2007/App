@@ -31,8 +31,7 @@ public class ChatApp {
             switch (option) {
                 case 1:
                     if (messagesEntered) {
-                        System.out.println("You have already entered your "
-                                + maxMessages + " messages.");
+                        System.out.println("You have already entered your " + maxMessages + " messages.");
                     } else {
                         sendMessages(scanner, maxMessages);
                         messagesEntered = true;
