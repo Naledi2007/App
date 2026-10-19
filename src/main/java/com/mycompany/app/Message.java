@@ -67,8 +67,7 @@ private static final List<Message> sentMessages = new ArrayList<>();
         if (LoginDetails.isValidCellNumber(recipient)) {
             return "Cell phone number successfully captured.";
         }
-        return "Cell phone number is incorrectly formatted or does not contain an "
-                + "international code. Please correct the number and try again.";
+        return "Cell phone number is incorrectly formatted or does not contain an "+ "international code. Please correct the number and try again.";
     }
 
 
@@ -95,27 +94,25 @@ private static final List<Message> sentMessages = new ArrayList<>();
             case 1:
                 sentMessages.add(this);
                 totalSent++;
-                return "Message successfully sent";
+                return "Message successfully sent.";
             case 2:
                 disregardedMessages.add(this);
-                return "Press 0 to delete the message";
+                return "Press 0 to delete the message.";
             case 3:
                 storeMessage();
                 storedMessages.add(this);
-                return "Message successfully stored";
+                return "Message successfully stored.";
             default:
-                return "Invalid option";
+                return "Invalid option.";
         }
     }
-
-   
+ 
+    
     public void deleteDisregarded() {
         disregardedMessages.remove(this);
+        
     }
-/*
-    *
-    *
-    */
+    
     
     public void storeMessage() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -141,10 +138,7 @@ private static final List<Message> sentMessages = new ArrayList<>();
 
    
     public String details() {
-        return "Message ID: " + messageID
-                + "\nMessage Hash: " + messageHash
-                + "\nRecipient: " + recipient
-                + "\nMessage: " + message;
+        return "Message ID: " + messageID+ "\nMessage Hash: " + messageHash + "\nRecipient: " + recipient+ "\nMessage: " + message;
     }
 
     
