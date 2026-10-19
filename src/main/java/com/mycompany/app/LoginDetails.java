@@ -62,10 +62,12 @@ public class LoginDetails {
     }
 
     public boolean checkCellPhoneNumber() {
+        return isValidCellNumber(cellPhoneNumber);
+    }
 
+    public static boolean isValidCellNumber(String number) {
         String cellPhoneRegex = "^\\+27[6-8][0-9]{8}$";
-
-        return cellPhoneNumber.matches(cellPhoneRegex);
+        return number != null && number.matches(cellPhoneRegex);
     }
 
     public String registerUser() {
