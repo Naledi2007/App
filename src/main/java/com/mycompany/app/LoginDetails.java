@@ -65,7 +65,10 @@ public class LoginDetails {
         return isValidCellNumber(cellPhoneNumber);
     }
 
+    
     public static boolean isValidCellNumber(String number) {
+        //Regex adapted from: (CodeLucky, 2025)Phone Number Validation with RegEx: A Beginner's Guide.
+        //Available at:https://www.youtube.com/watch?v=2ynftHoCyRU (Accessed 19 October 2026).
         String cellPhoneRegex = "^\\+27[6-8][0-9]{8}$";
         return number != null && number.matches(cellPhoneRegex);
     }

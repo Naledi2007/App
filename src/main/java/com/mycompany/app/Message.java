@@ -19,6 +19,8 @@ import java.util.Random;
  *
  * @author Student
  */
+
+//Unit tests based on:(Emeris School of Computer Science, 2025b; JUnit Team, n.d.).
 public class Message {
     public static String storeFile = "messages.json";
 
@@ -113,7 +115,8 @@ private static final List<Message> sentMessages = new ArrayList<>();
         
     }
     
-    
+    //Reference:(Google, n.d.) Gson User Guide.
+    //Available at: https://google.github.io/gson/UserGuide.html (Accessed: 19 October 2026).
     public void storeMessage() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         List<Message> all = loadStoredMessages();
