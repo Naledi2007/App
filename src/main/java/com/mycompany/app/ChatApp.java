@@ -10,7 +10,9 @@ import java.util.Scanner;
  * @author Student
  */
 public class ChatApp {
-    public static void run(Scanner scanner) {
+    public static void run(Scanner scanner, String senderName) {
+        MessageManager.sender = senderName;
+        MessageManager.loadStoredFromJson();
 
         System.out.println();
         System.out.println("Welcome to ChatApp.");
@@ -25,6 +27,7 @@ public class ChatApp {
             System.out.println("1) Send Messages");
             System.out.println("2) Show recently sent messages");
             System.out.println("3) Quit");
+            System.out.println("4) Stored Messages");
 
             int option = readInt(scanner, "Choose an option: ");
 
@@ -44,8 +47,11 @@ public class ChatApp {
                     running = false;
                     System.out.println("Goodbye!");
                     break;
+                case 4:
+                    storedMessagesMenu(scanner);
+                    break;
                 default:
-                    System.out.println("Please choose 1, 2 or 3.");
+                    System.out.println("Please choose 1, 2, 3 or 4.");
             }
         }
     }
@@ -108,5 +114,70 @@ public class ChatApp {
             }
         }
     }
-    
+            
+            /** Part 3: sub-menu for the stored messages features. */
+    private static void storedMessagesMenu(Scanner scanner) {
+        
+        boolean back = false;
+
+        while (!back) {
+            System.out.println();
+            System.out.println("--- Stored Messages ---");
+            System.out.println("a) Display sender and recipient of all stored messages");
+            System.out.println("b) Display the longest stored message");
+            System.out.println("c) Search for a message ID");
+            System.out.println("d) Search messages for a recipient");
+            System.out.println("e) Delete a message using its hash");
+            System.out.println("f) Display report");
+            System.out.println("g) Back to main menu");
+            System.out.print("Choose: ");
+
+            String choice = scanner.nextLine().trim().toLowerCase();
+
+            switch (choice) {
+                case "a":
+                    System.out.println(MessageManager.displaySenderAndRecipient());
+                    break;
+                case "b":
+                    System.out.println(MessageManager.longestStoredMessage());
+                    break;
+                case "c": {
+                    System.out.print("Enter the message ID: ");
+                    Message found = MessageManager.searchByMessageID(scanner.nextLine().trim());
+                    if (found == null) {
+                        System.out.println("No message found with that ID.");
+                    } else {
+                        System.out.println("Recipient: " + found.getRecipient());
+                        System.out.println("Message: " + found.getMessage());
+                    }
+                    break;
+                }
+                case "d": {
+                    System.out.print("Enter the recipient number: ");
+                    java.util.List<String> results =
+                            MessageManager.searchByRecipient(scanner.nextLine().trim());
+                    if (results.isEmpty()) {
+                        System.out.println("No messages found for that recipient.");
+                    } else {
+                        for (String text : results) {
+                            System.out.println("- " + text);
+                        }
+                    }
+                    break;
+                }
+                case "e":
+                    System.out.print("Enter the message hash: ");
+                    System.out.println(MessageManager.deleteByHash(scanner.nextLine().trim()));
+                    break;
+                case "f":
+                    System.out.println(MessageManager.displayReport());
+                    break;
+                case "g":
+                    back = true;
+                    break;
+                default:
+                    System.out.println("Please choose a letter from a to g.");
+            }
+        }
+    }
 }

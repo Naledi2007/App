@@ -75,7 +75,7 @@ public class App {
                     user.returnLoginStatus(loginUsername, loginPassword)
             );
             if (user.loginUser(loginUsername, loginPassword)){
-                ChatApp.run(scanner);
+                ChatApp.run(scanner, firstName + " " + lastName);
                    
             }
 
