@@ -95,14 +95,17 @@ private static final List<Message> sentMessages = new ArrayList<>();
         switch (choice) {
             case 1:
                 sentMessages.add(this);
+                MessageManager.addSent(this);
                 totalSent++;
                 return "Message successfully sent.";
             case 2:
                 disregardedMessages.add(this);
+                MessageManager.addDisregarded(this);
                 return "Press 0 to delete the message.";
             case 3:
                 storeMessage();
                 storedMessages.add(this);
+                 MessageManager.addStored(this);
                 return "Message successfully stored.";
             default:
                 return "Invalid option.";
@@ -112,6 +115,7 @@ private static final List<Message> sentMessages = new ArrayList<>();
     
     public void deleteDisregarded() {
         disregardedMessages.remove(this);
+        MessageManager.removeDisregarded(this);
         
     }
     
@@ -163,6 +167,7 @@ private static final List<Message> sentMessages = new ArrayList<>();
         storedMessages.clear();
         disregardedMessages.clear();
         totalSent = 0;
+        MessageManager.reset();
     }
 
     public String getMessageID() { return messageID; }
